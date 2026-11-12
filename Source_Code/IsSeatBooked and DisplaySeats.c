@@ -24,7 +24,8 @@ struct ticket {
 
 int isSeatBooked(struct ticket *ticketrecord, int ticketcount, int trainId, char date[], int row, int col) {
 
-    for (int i = 0; i < ticketcount; i ++) {
+  int i;
+  for (i = 0; i < ticketcount; i ++) {
 
         if (ticketrecord[i].active == 1) { 
             if (ticketrecord[i].trainId	== trainId)
@@ -41,13 +42,13 @@ int isSeatBooked(struct ticket *ticketrecord, int ticketcount, int trainId, char
 }
 
 void DisplaySeat(struct ticket *ticketrecord, int ticketcount, int trainId, char date[], int rows, int cols) {
-
      int temp = 0;
+     int i, j; 
 
      printf("Available seats \n");
 
-     for (int i = 0; i < rows; i ++){
-         for (int j = 0; j < cols; j ++){
+     for (i = 0; i < rows; i++){       
+         for (j = 0; j < cols; j++){   
 
              temp = isSeatBooked(ticketrecord, ticketcount, trainId, date, i + 1, j + 1);
 
