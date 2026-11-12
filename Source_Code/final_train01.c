@@ -1,6 +1,4 @@
 #include "globals.h"
-//#include <windows.h>
-//#define waitOneSecond() Sleep(1000)
 
 // FUNCTION PROTOTYPE (findPassenger is defined later but used earlier)
 int findPassenger(struct passenger p[], int count, int id);
@@ -38,7 +36,6 @@ int emailchk(char email[])
         {
             if (at != -1)
                 return 0;
-
             at = i;
         }
 
@@ -52,61 +49,6 @@ int emailchk(char email[])
         return 0;
     }
     return 1;
-}
-
-// ERROR CHECK FUNCTION
-int errorChk(char *str1, char *str2)
-{
-    int check = strcmp(str1, str2);
-
-    if (check == 0)
-    {
-        return 1;
-    }
-    else
-    {
-        return 0;
-    }
-}
-
-// PASSWORD VALIDATION FUNCTION
-int passchk(char *pass)
-{
-    int i;
-    int fl = 0, fn = 0, fc = 0, fu = 0;
-
-    if (strlen(pass) < 8)
-    {
-        return 0;
-    }
-
-    for (i = 0; pass[i] != '\0'; i++)
-    {
-        if (isdigit((unsigned char)pass[i]))
-            fn = 1;
-
-        if (islower((unsigned char)pass[i]))
-            fl = 1;
-
-        if (isupper((unsigned char)pass[i]))
-            fu = 1;
-
-        if (pass[i] == '!' || pass[i] == '@' ||
-            pass[i] == '#' || pass[i] == '$' ||
-            pass[i] == '%' || pass[i] == '^' ||
-            pass[i] == '&' || pass[i] == '*' ||
-            pass[i] == '?')
-        {
-            fc = 1;
-        }
-    }
-
-    if (fl && fn && fc && fu)
-    {
-        return 1;
-    }
-
-    return 0;
 }
 
 // USERNAME VALIDATION FUNCTION
@@ -128,104 +70,6 @@ int userchk(char *username)
     }
 
     return 1;
-}
-
-// REGISTRATION FUNCTION
-void adminReg(char *username, char *password)
-{
-    printf("\n====== REGISTRATION PAGE ======\n");
-
-    while (1)
-    {
-        printf("\nUsername should contain only letters.");
-        printf("\nUsername must be greater than 5 letters.");
-
-        printf("\nEnter Username: ");
-        scanf("%99s", username);
-
-        if (userchk(username))
-        {
-            break;
-        }
-        else
-        {
-            printf("\nInvalid Username! Try again.\n");
-        }
-    }
-
-    while (1)
-    {
-        printf("\nPassword Requirements:");
-        printf("\n- At least 8 characters");
-        printf("\n- At least one number");
-        printf("\n- At least one uppercase letter");
-        printf("\n- At least one lowercase letter");
-        printf("\n- At least one special character");
-
-        printf("\n\nEnter Password: ");
-        scanf("%99s", password);
-
-        if (passchk(password))
-        {
-            printf("\nRegistered Successfully!\n");
-            break;
-        }
-        else
-        {
-            printf("\nInvalid Password! Try again.\n");
-        }
-    }
-}
-
-// LOGIN FUNCTION
-void adminLogin(char *username, char *password)
-{
-    char user[100];
-    char pass[100];
-
-    int attempts;
-    int seconds;
-
-    printf("\n====== LOGIN SYSTEM ======\n");
-
-    for (attempts = 1; attempts <= 3; attempts++)
-    {
-        printf("\nAttempt %d - Username: ", attempts);
-        scanf("%99s", user);
-
-        printf("Password: ");
-        scanf("%99s", pass);
-
-        if (errorChk(user, username) &&
-            errorChk(pass, password))
-        {
-            printf("\nLogin Successful!\n");
-            printf("Welcome %s!\n", username);
-            return;
-        }
-
-        printf("\nWrong username or password.\n");
-    }
-
-    printf("\n====== ACCOUNT LOCKED ======\n");
-    printf("Please wait 2 minutes before trying again.\n");
-
-    // TWO-MINUTE COUNTDOWN
-    for (seconds = 120; seconds >= 0; seconds--)
-    {
-        printf("\rTime remaining: %02d:%02d", seconds / 60, seconds % 60);
-        fflush(stdout);
-        if (seconds > 0)
-        {
-           // Sleep(1000);
-        }
-    }
-
-    printf("\nTime remaining: 00:00\n");
-    printf("You can login now!\n");
-
-    // LOGIN AGAIN AFTER LOCKOUT
-    adminLogin(username, password); // <--- FIXED THE TYPO HERE
 }
 
 void addTrain()
@@ -269,7 +113,6 @@ void addTrain()
     printf("\nTrain added successfully!\n");
 }
 
-
 //DISPLAY ALL TRAINS
 void displayTrains()
 {
@@ -283,7 +126,6 @@ void displayTrains()
     for(i = 0; i < trainCount; i++)
     {
         printf("\nTrain Number: %d",trains[i].trainNumber);
-
         printf("\nTrain Name: %s",trains[i].trainName);
         printf("\nRoute: ");
         for(j = 0; j < trains[i].stationCount; j++)
@@ -292,10 +134,8 @@ void displayTrains()
             if(j < trains[i].stationCount - 1)
                 printf(" -> ");
         }
-
         printf("\nFare Per Station: Rs. %d",trains[i].farePerStation);
         printf("\nTotal Seats: %d",trains[i].totalSeats);
-
         printf("\nAvailable Seats: %d\n",trains[i].availableSeats);
     }
 }
@@ -318,7 +158,6 @@ void displayCustomers(struct passenger *p, int count)
         printf("Age: %d\n", p[i].age);
         printf("Phone: %s\n", p[i].phone);
         printf("Email: %s\n",p[i].email);
-
         printf("-----------------------------\n");
     }
 }
@@ -327,7 +166,6 @@ void displayCustomers(struct passenger *p, int count)
 void updateCustomer(struct passenger *p, int count)
 {
     int i, ID;
-
     printf("\n====== UPDATE CUSTOMER INFORMATION ======\n");
     printf("Enter ID: ");
     scanf("%d", &ID);
@@ -339,8 +177,7 @@ void updateCustomer(struct passenger *p, int count)
         printf("Current Name: %s\n", p[i].name);
         printf("Enter New Name: ");
         getchar();
-        fgets(p[i].name,
-              sizeof(p[i].name), stdin);
+        fgets(p[i].name, sizeof(p[i].name), stdin);
         p[i].name[strcspn(p[i].name, "\n")] = '\0';
 
         do
@@ -351,31 +188,26 @@ void updateCustomer(struct passenger *p, int count)
             {
                 printf("Invalid Age! Try again.\n");
             }
-
         } while (p[i].age <= 0 || p[i].age > 120);
 
         do
         {
             printf("Enter New Phone Number: ");
             scanf("%19s", p[i].phone);
-
             if (!phonechk(p[i].phone))
             {
                 printf("Invalid Phone Number! Try again.\n");
             }
-
         } while (!phonechk(p[i].phone));
 
         do
         {
             printf("Enter New Email: ");
             scanf("%49s", p[i].email);
-
             if (!emailchk(p[i].email))
             {
                 printf("Invalid Email! Try again.\n");
             }
-
         } while (!emailchk(p[i].email));
 
         printf("\nCustomer Information Updated Successfully!\n");
@@ -393,7 +225,6 @@ void deleteCustomer(struct passenger p[], int *count)
     int found = 0;
 
     printf("\n====== DELETE CUSTOMER ======\n");
-
     printf("Enter Customer ID to delete: ");
     scanf("%d", &deleteID);
 
@@ -402,21 +233,15 @@ void deleteCustomer(struct passenger p[], int *count)
         if (p[i].customerId == deleteID)
         {
             found = 1;
-
-            // Give the seat back if this customer had a booking
             if (p[i].booked == 1)
             {
                 trains[p[i].trainIndex].availableSeats++;
             }
-
-            // Shift remaining customers one position left
             for (j = i; j < *count - 1; j++)
             {
                 p[j] = p[j + 1];
             }
-
             (*count)--;
-
             printf("\nCustomer Deleted Successfully!\n");
             break;
         }
@@ -435,7 +260,6 @@ void registerCustomer(struct passenger p[], int *count)
     while (1)
     {
         duplicate = 0;
-
         printf("Enter Customer ID: ");
         scanf("%d", &p[*count].customerId);
 
@@ -465,24 +289,21 @@ void registerCustomer(struct passenger p[], int *count)
     {
         printf("Enter Age: ");
         scanf("%d", &p[*count].age);
-
     } while (p[*count].age <= 0 || p[*count].age > 120);
 
     do
     {
         printf("Enter Phone: ");
         scanf("%19s", p[*count].phone);
-
     } while (!phonechk(p[*count].phone));
 
     do
     {
         printf("Enter Email: ");
         scanf("%49s", p[*count].email);
-
     } while (!emailchk(p[*count].email));
+    
     (*count)++;
-
     printf("\nCustomer Registered Successfully!\n");
 }
 
@@ -546,13 +367,10 @@ void booking(struct passenger *p)
                     destPos = j;
             }
 
-            if(sourcePos != -1 && destPos != -1 &&
-               sourcePos < destPos &&
-               trains[i].availableSeats > 0)
+            if(sourcePos != -1 && destPos != -1 && sourcePos < destPos && trains[i].availableSeats > 0)
             {
                 selected = i;
             }
-
             break;
         }
     }
@@ -563,11 +381,9 @@ void booking(struct passenger *p)
         return;
     }
 
-    fare = (destPos - sourcePos) *
-           trains[selected].farePerStation;
+    fare = (destPos - sourcePos) * trains[selected].farePerStation;
 
     printf("\n===== BOOKING DETAILS =====");
-
     printf("\nPassenger: %s", p->name);
     printf("\nTrain: %s", trains[selected].trainName);
     printf("\nSource: %s", source);
@@ -575,7 +391,6 @@ void booking(struct passenger *p)
     printf("\nFare: Rs. %d", fare);
 
     printf("\nConfirm Booking (1=Yes, 0=No): ");
-
     if(scanf("%d", &i) != 1 || i != 1)
     {
         printf("\nBooking Cancelled!");
@@ -583,20 +398,13 @@ void booking(struct passenger *p)
     }
 
     p->trainIndex = selected;
-
     strcpy(p->trainName, trains[selected].trainName);
     strcpy(p->departure, source);
     strcpy(p->destination, destination);
-
     p->Fare = fare;
-
-    p->seatno = trains[selected].totalSeats -
-                trains[selected].availableSeats + 1;
-
+    p->seatno = trains[selected].totalSeats - trains[selected].availableSeats + 1;
     p->bookingId = nextBookingID++;
-
     p->booked = 1;
-
     trains[selected].availableSeats--;
 
     printf("\n\nBOOKING SUCCESSFUL!");
@@ -611,12 +419,9 @@ void services(struct passenger *p)
         printf("\nBook your ticket first!\n");
         return;
     }
-
     printf("\n--- SERVICES ---\n");
-
     printf("1. Food - Rs. 500\n");
     printf("0. No Service\n");
-
     printf("Choose Service: ");
     scanf("%d",&p->foodChoice);
 
@@ -628,6 +433,7 @@ void services(struct passenger *p)
         p->serviceCost=0;
     }
 }
+
 void billing(struct passenger *p)
 {
     float discount = 0;
@@ -676,11 +482,10 @@ void receipt(struct passenger *p)
     printf("Final Amount: Rs. %.2f\n",p->finalBill);
     printf("=====================================\n");
 }
+
 void customerInfo(struct passenger *p, int id)
 {
-    // clear any leftover data (important after a record was deleted)
     memset(p, 0, sizeof(struct passenger));
-
     p->customerId = id;
 
     printf("Enter passenger name: ");
@@ -723,7 +528,6 @@ void customerInfo(struct passenger *p, int id)
 int findPassenger(struct passenger p[],int count,int id)
 {
     int i;
-
     for(i = 0;i<count;i++)
     {
         if (p[i].customerId==id)
@@ -739,11 +543,6 @@ void adminMenu()
     int count = 0;
     int nextId = 1001;
     int choice, id, index;
-    char username[100], password[100];
-
-    // STAFF REGISTRATION AND LOGIN BEFORE THE MENU
-    adminReg(username, password);
-    adminLogin(username, password);
 
     do
     {
@@ -777,17 +576,13 @@ void adminMenu()
                     printf("Passenger limit reached!\n");
                 }
                 break;
-
             case 2:
                 displayCustomers(p, count);
                 break;
-
             case 3:
                 printf("Enter customer ID: ");
                 scanf("%d",&id);
-
                 index=findPassenger(p, count, id);
-
                 if (index != -1)
                 {
                     printf("\nPassenger found!\n");
@@ -802,21 +597,16 @@ void adminMenu()
                     printf("Passenger not found!\n");
                 }
                 break;
-
             case 4:
                 updateCustomer(p, count);
                 break;
-
             case 5:
                 deleteCustomer(p, &count);
                 break;
-
             case 6:
                 printf("Enter customer ID: ");
                 scanf("%d",&id);
-
                 index=findPassenger(p, count, id);
-
                 if (index !=-1)
                 {
                     booking(&p[index]);
@@ -826,13 +616,10 @@ void adminMenu()
                     printf("Passenger not found!\n");
                 }
                 break;
-
             case 7:
                 printf("Enter customer ID: ");
                 scanf("%d",&id);
-
                 index=findPassenger(p,count,id);
-
                 if (index!=-1)
                 {
                     services(&p[index]);
@@ -842,13 +629,10 @@ void adminMenu()
                     printf("Passenger not found!\n");
                 }
                 break;
-
             case 8:
                 printf("Enter customer ID: ");
                 scanf("%d",&id);
-
                 index = findPassenger(p, count, id);
-
                 if (index !=-1)
                 {
                     billing(&p[index]);
@@ -858,13 +642,10 @@ void adminMenu()
                     printf("Passenger not found!\n");
                 }
                 break;
-
             case 9:
                 printf("Enter customer ID: ");
                 scanf("%d", &id);
-
                 index=findPassenger(p, count, id);
-
                 if (index!=-1)
                 {
                     receipt(&p[index]);
@@ -874,19 +655,15 @@ void adminMenu()
                     printf("Passenger not found!\n");
                 }
                 break;
-
             case 10:
                 addTrain();
                 break;
-
             case 11:
                 displayTrains();
                 break;
-
             case 12:
                 printf("Program ended.\n");
                 break;
-
             default:
                 printf("Invalid choice!\n");
         }
