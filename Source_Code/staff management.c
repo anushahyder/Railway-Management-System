@@ -27,16 +27,16 @@ int staffReg() {
     printf("ID\nEnter your name: "); 
     scanf("%60s",regid);
     int edit = pcount + 1;
-    floor = (struct staff *)realloc(floor, edit * sizeof(struct staff));
+    staff_floor = (struct staff *)realloc(staff_floor, edit * sizeof(struct staff));
 
     
-    strcpy(floor[pcount].regid, regid);
+    strcpy(staff_floor[pcount].regid, regid);
 
     do {
         printf("\nEnter password\nPassword must be 8 characters long\nMust have a numeric value and at least one special character\n"); 
         scanf("%20s",regpass);
         if (passchk(regpass)==1) { 
-            strcpy(floor[pcount].regpass, regpass);
+            strcpy(staff_floor[pcount].regpass, regpass);
             printf("\nRegistered Successfully\n"); 
             break;
         } else { 
@@ -58,7 +58,7 @@ int staffLogin(void){
         int i;
         int found=0;
         for(i=0;i<pcount;i++){
-            if((errorChk(floor[i].regid, loginid) == 1) && (errorChk(floor[i].regpass, loginpass) == 1)){
+            if((errorChk(staff_floor[i].regid, loginid) == 1) && (errorChk(staff_floor[i].regpass, loginpass) == 1)){
                 printf("\nLogin Successful\n");
                 return 1;
             }
@@ -105,7 +105,7 @@ void staffMenu(void) {
             int confirm;
             scanf("%d", &confirm);
             if (confirm == 1) { 
-                free(floor); 
+                free(staff_floor); 
                 printf("\nSystem cleared. Goodbye!\n");
                 return;
             }
