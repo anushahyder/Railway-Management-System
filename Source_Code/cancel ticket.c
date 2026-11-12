@@ -1,3 +1,4 @@
+#include "globals.h"
 void CancelTicket(struct ticket *ticketrecord, int ticketcount) {
 
     int ticketID, found = 0;
