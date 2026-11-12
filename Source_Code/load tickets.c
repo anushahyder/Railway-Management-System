@@ -1,3 +1,4 @@
+#include "globals.h"
 void LoadTickets(struct ticket **ticketrecord, int *ticketcount, int *capacity) {
 
     FILE *file = fopen("tickets.dat", "rb");
