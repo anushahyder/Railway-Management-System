@@ -1,3 +1,4 @@
+#include "globals.h"
 void SaveTickets(struct ticket *ticketrecord, int ticketcount) {
 
     FILE *file = fopen("tickets.dat", "wb");
