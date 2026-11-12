@@ -1,3 +1,4 @@
+#include "globals.h"
 void DisplayTicket(struct ticket *ticketrecord, int index) {
 
     printf("\n========== TICKET RECEIPT ==========\n");
