@@ -1,0 +1,19 @@
+name: Compile C Project
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Compile C Files
+      run: |
+        cd Source_Code
+        gcc *.c -o RailwaySystem
