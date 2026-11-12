@@ -1,3 +1,4 @@
+#include "globals.h"
 void CalculateFare(struct ticket *ticketrecord, int index) {
 
     double total = 0.0;
