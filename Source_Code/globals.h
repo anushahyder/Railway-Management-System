@@ -68,7 +68,7 @@ extern int trainCount;
 extern int passengerCount;
 extern int nextCustomerID;
 extern int nextBookingID;
-extern struct staff *floor;
+extern struct staff *staff_floor;
 extern int pcount;
 
 // --- FUNCTION PROTOTYPES ---
