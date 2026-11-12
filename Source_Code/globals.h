@@ -76,6 +76,8 @@ extern int pcount;
 void staffMenu(void);
 int staffReg(void);
 int staffLogin(void);
+void adminReg(char *username, char *password);
+void adminLogin(char *username, char *password);
 int errorChk(char *str1, char *str2);
 int passchk(char *regpass);
 
