@@ -1,55 +1,6 @@
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-#include <time.h>
-#include <stdlib.h>
+#include "globals.h"
 #include <windows.h>
 #define waitOneSecond() Sleep(1000)
-
-struct passenger
-{
-    int customerId;
-    char name[80];
-    int age;
-    char phone[20];
-    char email[50];
-    int trainIndex;
-    char trainName[40];
-    char departure[30];
-    char destination[30];
-
-    int bookingId;
-    int seatno;
-    int booked;
-
-    float Fare;
-    int foodChoice;
-    float serviceCost;
-    float totalBill;
-    float gst;
-    float finalBill;
-};
-struct Train
-{
-    int trainNumber;
-    char trainName[40];
-
-    char stations[10][30];
-    int stationCount;
-
-    int farePerStation;
-    int totalSeats;
-    int availableSeats;
-};
-
-struct Train trains[20];
-struct passenger p[200];
-
-int trainCount = 0;
-int passengerCount = 0;
-
-int nextCustomerID = 1001;
-int nextBookingID = 5001;
 
 // FUNCTION PROTOTYPE (findPassenger is defined later but used earlier)
 int findPassenger(struct passenger p[], int count, int id);
@@ -783,7 +734,7 @@ int findPassenger(struct passenger p[],int count,int id)
     return -1;
 }
 
-int main()
+void adminMenu()
 {
     int count = 0;
     int nextId = 1001;
@@ -940,6 +891,4 @@ int main()
                 printf("Invalid choice!\n");
         }
     } while (choice != 12);
-
-    return 0;
 }
