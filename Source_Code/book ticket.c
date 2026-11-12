@@ -1,3 +1,4 @@
+#include "globals.h"
 void BookTicket(int cusID, int trainID, int rows, int cols,
                 struct ticket **ticketrecord, int *ticketcount, int *capacity) {
 
