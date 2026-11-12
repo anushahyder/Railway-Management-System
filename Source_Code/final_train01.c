@@ -1,6 +1,6 @@
 #include "globals.h"
-#include <windows.h>
-#define waitOneSecond() Sleep(1000)
+//#include <windows.h>
+//#define waitOneSecond() Sleep(1000)
 
 // FUNCTION PROTOTYPE (findPassenger is defined later but used earlier)
 int findPassenger(struct passenger p[], int count, int id);
