@@ -131,7 +131,7 @@ int userchk(char *username)
 }
 
 // REGISTRATION FUNCTION
-void staffReg(char *username, char *password)
+void adminReg(char *username, char *password)
 {
     printf("\n====== REGISTRATION PAGE ======\n");
 
@@ -178,7 +178,7 @@ void staffReg(char *username, char *password)
 }
 
 // LOGIN FUNCTION
-void staffLogin(char *username, char *password)
+void adminLogin(char *username, char *password)
 {
     char user[100];
     char pass[100];
@@ -217,7 +217,7 @@ void staffLogin(char *username, char *password)
         fflush(stdout);
         if (seconds > 0)
         {
-            Sleep(1000);
+           // Sleep(1000);
         }
     }
 
@@ -742,8 +742,8 @@ void adminMenu()
     char username[100], password[100];
 
     // STAFF REGISTRATION AND LOGIN BEFORE THE MENU
-    staffReg(username, password);
-    staffLogin(username, password);
+    adminReg(username, password);
+    adminLogin(username, password);
 
     do
     {
