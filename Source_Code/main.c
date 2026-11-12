@@ -7,7 +7,7 @@ int trainCount = 0;
 int passengerCount = 0;
 int nextCustomerID = 1001;
 int nextBookingID = 5001;
-struct staff *floor = NULL;
+struct staff *staff_floor = NULL;
 int pcount = 0;
 
 int main() {
@@ -42,7 +42,6 @@ int main() {
                 adminMenu(); 
                 break;
             case 3:
-                // Quick menu for ticketing functions
                 printf("\n--- TICKETING ---\n");
                 printf("1. Book a Ticket\n");
                 printf("2. Cancel a Ticket\n");
@@ -82,7 +81,7 @@ int main() {
             case 5:
                 SaveTickets(ticketrecord, ticketcount);
                 free(ticketrecord);
-                free(floor);
+                free(staff_floor);
                 printf("Exiting system. Goodbye!\n");
                 return 0;
             default:
