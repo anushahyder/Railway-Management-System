@@ -225,7 +225,7 @@ void adminLogin(char *username, char *password)
     printf("You can login now!\n");
 
     // LOGIN AGAIN AFTER LOCKOUT
-    adminLogin((username, password);
+    adminLogin(username, password); // <--- FIXED THE TYPO HERE
 }
 
 void addTrain()
