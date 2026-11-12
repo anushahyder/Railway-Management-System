@@ -1,14 +1,4 @@
-#include <stdio.h>                   
-#include <stdlib.h>						
-#include <string.h>
-
-struct staff{
-	char regpass[21]; 
-	char regid[61];   
-};
-
-struct staff *floor=NULL;
-int pcount=0;
+#include "globals.h"
 
 int errorChk(char *str1, char *str2){ 
     int check=strcmp(str1, str2); 
@@ -97,7 +87,7 @@ int staffLogin(void){
 void staffMenu(void) { 
 	int menu;
 	while(1){
-		printf("\nGo to:\n1. Registration Page\n2. Login Page\n3. Exit Program"); // Added an explicit exit option
+		printf("\nGo to:\n1. Registration Page\n2. Login Page\n3. Exit Program"); 
 		printf("\nEnter your choice: ");
 		scanf("%d",&menu);
 	switch(menu){
@@ -114,7 +104,7 @@ void staffMenu(void) {
             printf("\nAre you sure you want to exit? (1 for Yes / 0 for No): ");
             int confirm;
             scanf("%d", &confirm);
-            if (confirm == 1) { //do free the dynamic memory
+            if (confirm == 1) { 
                 free(floor); 
                 printf("\nSystem cleared. Goodbye!\n");
                 return;
