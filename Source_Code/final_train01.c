@@ -225,7 +225,7 @@ void adminLogin(char *username, char *password)
     printf("You can login now!\n");
 
     // LOGIN AGAIN AFTER LOCKOUT
-    staffLogin(username, password);
+    adminLogin((username, password);
 }
 
 void addTrain()
